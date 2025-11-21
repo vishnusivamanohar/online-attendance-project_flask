@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me & My Projects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .p1{
+            
+            color: black;
+            background-color: #f4f4f4;
+            padding: 20px;
+            font-size: 24px;
+			border-radius: 50px;
+			margin-left:400px;
+        }
+		.p2{
+            background-color: #333;
+            color: black;
+			background-color: #f4f4f4;
+			border-radius: 30px;
+            padding: 10px;
+            font-size: 18px;
+			margin-right:20px;
+        }
+		button{
+			border-radius: 40px;
+			cursor:pointer;
+		}
+		button:hover {
+			background-color: black;
+			color: white;
+		}
+        section {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            padding: 10px;
+            background-color: gray;
+            color: white;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .box {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: white;
+            margin-top: 20px;
+        }
+        p {
+            padding: 15px;
+            line-height: 2;
+        }
+        img {
+            margin-left: 50px;
+            margin-top: 20px;
+        }
+		a{
+			text-decoration: none;
+		}
+    /* Add this to your existing style section */
+    header {
+        width: 100%;
+        padding: 10px 0;
+        background-color: #f4f4f4;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+    
+    .p1 {
+        color: black;
+        background-color: #f4f4f4;
+        padding: 15px 25px;
+        font-size: 24px;
+        border-radius: 50px;
+        text-align: center;
+        flex-grow: 1;
+        margin: 0 10px;
+    }
+    
+    .p2 {
+        background-color: #333;
+        color: white;
+        border-radius: 30px;
+        padding: 12px 25px;
+        font-size: 18px;
+        border: none;
+        white-space: nowrap;
+    }
+    
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+            padding: 10px;
+        }
+        
+        .p1 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            margin-left: 0;
+            width: 100%;
+            padding: 10px 15px;
+        }
+        
+        .p2 {
+            margin-bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .p1 {
+            font-size: 18px;
+        }
+        
+        .p2 {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+    }
+    </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+        <div class="p1">About The Website Online Attendance</div>
+        <div><a href="{{ url_for('about_page2') }}"><button class="p2">My Profile</button></a></div>
+    </div>
+</header>
+
+
+    <section>
+        <h2>About This Website</h2>
+        <p>
+            Nowadays, everything is moving online, so why shouldn't attendance be online too? Let's make it happen!
+            This website is designed for teachers to record student attendance online instead of using traditional methods. To access the website, you must enter a password. If the password is correct, you will be redirected to the homepage.
+        </p>
+        <p>
+            The homepage includes the website's logo and key information about the online attendance system.<br>
+            This website mainly consists of five pages:<br>
+            1. Home Page<br>
+            2. Students Page<br>
+            3. Attendance Page<br>
+            4. Mail Page<br>
+            5. About / Learn More Page<br>
+            Let's explore each of these pages in detail.
+        </p>
+    </section>
+
+    <section>
+        <h3>1. Home Page</h3>
+        <img src="{{ url_for('static', filename='images/home_page.PNG') }}" alt="Home Page" width="900">
+        <p>
+            The home page contains a welcome message and an introduction to the website.<br>
+            At the top, you will find a navigation bar, which allows you to move to different pages: Students Page, Attendance Page, Mail Page, and About/Learn More Page.
+        </p>
+    </section>
+
+    <section>
+        <h3>2. Students Page</h3>
+        <img src="{{ url_for('static', filename='images/students_page.PNG') }}" alt="Students Page" width="900">
+        <p>
+            The Students Page follows the same theme as the Home Page, with a navigation bar for easy access to other sections. It provides key information and a "Learn More" button that redirects to the About page.
+        </p>
+        <p>
+            The Students Page allows you to perform three actions:<br>
+            1. Add students<br>
+            2. View students<br>
+            3. Delete students<br>
+            By clicking these buttons, you will be taken to a selection page where you can choose the branch, section, year, and number of students for the action.In our new apdate you can add the n no.of students data with a seconds by apploding the xml file which contains students data already.
+        </p>
+        <img src="{{ url_for('static', filename='images/selection_page.PNG') }}" alt="Selection Page" width="900">
+        <p>
+            If you choose "Add Students" or "Delete Students," after selecting the class and number of students, you will be provided with student information fields.
+        <img src="{{ url_for('static', filename='images/student_boxes.PNG') }}" alt="Student Boxes" width="900">
+            After filling in the details, clicking "Submit Data" will insert all data into the database. You can verify student additions by clicking "View Students" on the main Students Page.
+        <img src="{{ url_for('static', filename='images/view_students.PNG') }}" alt="View Students" width="900">
+		</p>
+        <p>
+			In the above image,The "Go Back" button returns you to main students page.<br>
+			<br><br>
+			This concludes the Students Page overview.
+		</p>	
+    </section>
+
+    <section>
+        <h3>3. Attendance Page</h3>
+        <img src="{{ url_for('static', filename='images/attendance_page.PNG') }}" alt="Attendance Page" width="900">
+        <p>
+            The Attendance Page has three main options:<br>
+            1. Student Attendance<br>
+            2. display Attendance <br>
+			3. attendance parsentage<br>
+			NOTE:1.By clicking on the above choices first you will select the class.
+			<img src="{{ url_for('static', filename='images/select.PNG') }}" alt="View Attendance" width="900">
+        </p>
+        <p>
+            <b>Student Attendance:</b>here displays a table with columns for serial number, roll number, date, and period. Attendance is marked using checkboxes. Checked means "Present," while unchecked means "Absent." After marking attendance, click "Apply Attendance" to save the data.<br>
+			here the preiod's are autometically created according to the time.After the period timings no attendance will be done.Hence <b>be carfull</b>
+			<img src="{{ url_for('static', filename='images/student_attendance.PNG') }}" alt="Student Attendance" width="900">
+			NOTE:1.The attendance is done for a period in that period timeings only.for example period-1 timing is 9:00 - 10:00 then the Attendance should be done in that period of time only. after the time completion you cant able to give attendance for that period.<br>
+			     2.If you forget to apply Attendance for a period (Eg.period-1)after you applied to next period,than in attendance table you see a blank space. we cant apply attendance again!<br><br>
+			<b>Display Attendance:</b> Displays attendance records in a tabular format, including multiple dates and periods from starting to ending.<br>As shown in the below image.<br>
+			<img src="{{ url_for('static', filename='images/display attendance.PNG') }}" alt="View Attendance" width="900">
+			<br>
+			<b>Attendance Persentage:</b> By clicking on this option user can see the attendance persentage of a selected class, including no.of working days in  the collage and no.fo periods attended and not attende.<br>As shown in the below image.<br>
+			<img src="{{ url_for('static', filename='images/attendance_parsentage.PNG') }}" alt="View Attendance" width="900">
+			In the above pages,The "Go Back" button returns you to main attendance page.<br>
+			<br>
+             This concludes the Attendance Page overview.
+        </p>
+    </section>
+
+    <section>
+        <h3>4. Mail Page</h3>
+        <img src="{{ url_for('static', filename='images/mail_page.PNG') }}" alt="Mail Page" width="900">
+        <p>
+            The Mail Page allows teachers to send notifications/messages through email to students.
+			It involve two functions,<br>
+			1.Send to all<br>
+			2.Send to selected<br>
+			First enter the massage/mail you want to send in the text area provided.Aftr that,<br>
+			By the option "Send to All" you can send your massage to all students in the collage with out any selection.<br>
+			By the option "Send to selected" you can send your massage to students in the selected class.<br>
+				
+		</p>
+    </section>
+	
+	<section>
+        <h3>3.Sem/Year Options Page:</h3>
+        <img src="{{ url_for('static', filename='images/s.y_options.PNG') }}" alt="Sem/Year options Page" width="900">
+        <p>
+            The Sem/Year Options Page has  options:<br>
+            1. Delete Attendance Data<br>
+            2. Change Class year <br>
+		</p>
+        <p>
+			<b>Delete Attendance Data:</b>Here you can delete all attendance data for every class at a time from database.it is used in only after a sem complition.<br>By clicking clicking on it you will get a conform message as shown in the below image.<br>
+			<img src="{{ url_for('static', filename='images/delete_attendance_data.PNG') }}" alt="View Attendance" width="900">
+			<br>
+			<b>Change Class year:</b>Here you can change the class year of a all class with students data.This option is used to change class names after a year.
+			<br>for example if a class name is "1_AIML_B it is changed to 2_AIML_B"<br>NOTE: For 4th year including changing year ( 4_AIML_B to  1_AIML_B) it will also delete the <b>data</b> also.<br>By clicking clicking on it you will get a conform message as shown in the below image.<br>
+			<img src="{{ url_for('static', filename='images/change_class_names.PNG') }}" alt="View Attendance" width="900">
+			<br>
+             This concludes the Sem/Year Options Page overview.
+        </p>
+    </section>
+	
+	<section>
+        <h2>Working of the wedsite:</h2>
+        <p>
+            This website includes both frontend and backend development.<br>
+
+			The entire frontend is built using HTML and CSS, providing a structured layout and styling for a user-friendly experience.<br>
+
+			For the backend, I used Flask, a Python-based web framework that handles the logic and communication between the user interface and the database.<br>
+
+			The database is created using MySQL, which stores all the necessary data for the website.<br>
+
+			<b>How It Works:</b><br>
+			When a user interacts with the website, the provided data is stored in the MySQL database.<br>
+			Flask acts as a bridge between the database and the frontend, retrieving and displaying the necessary information dynamically.<br>
+			The Flask application runs in the background as a server, handling requests, processing data, and ensuring smooth communication between different components.<br>
+			<img src="{{ url_for('static', filename='images/app.PNG') }}" alt="View Attendance" width="900">
+			This combination of HTML, CSS, Flask, and MySQL ensures an efficient, responsive, and interactive online attendance system.<br>
+			<br>
+			<a href="{{ url_for('home_page') }}">Go back to home_page</a>
+			
+        </p>
+    </section>
+    <footer>
+        Online Attendance | created by Thotapalli Vishnu Siva Manohar | All Info in Next page <a href="{{ url_for('about_page2') }}" ><button type="submit">--></button> </a>
+    </footer>
+
+</body>
+</html>

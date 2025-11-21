@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Data</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+			margin:auto;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        td {
+            padding: 8px;
+            text-align: left;
+			width:100px;
+        }
+		th{
+			background-color:yellow;
+            padding: 8px;
+            text-align: left;
+        }
+        .rn {
+            background-color: orange;
+			width:150px;
+        }
+		.sn {
+            background-color: yellow;
+			width:50px;
+        }
+		 button {
+            width: 20%;
+            padding: 12px;
+            background: orange;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+			margin-top: 10px;
+        }
+		 button:hover {
+            background: darkorange;
+            color: white;
+            
+        }
+    </style>
+</head>
+<body>
+ <center> <h1> persentage of  {{table_name}} for {{total_columns}} days</h1></center>
+    <table>
+        <thead>
+				<tr>
+					   <th class="sn">S.No</th>
+					   <th class="rn">Roll-number</th>
+					   <th>No.of days</th>
+					   <th>No.of periods</th>
+					   <th>No.of periods attended</th>
+					   <th>No.of periods not attended</th>
+					   <th>Total persentage</th>
+					   
+				</tr>
+        </thead>
+        <tbody>
+			{% for row in data %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				{% set ns = namespace(pd=0) %}  <!-- Use namespace to modify values -->
+
+				{% for value in row.values() %}
+					{% if loop.index0 == 0 %}
+						<td>{{ value }}</td>
+					{% elif value == 'P' %}
+						{% set ns.pd = ns.pd + 1 %}  <!-- Correctly increment pd -->
+					{% endif %}
+				{% endfor %}
+
+				{% set td = total_columns // 7 %}  <!-- Integer division -->
+				<td>{{ td }}</td>
+				<td>{{ total_columns }}</td>
+				<td>{{ ns.pd }}</td>  <!-- Correctly display counted 'P' values -->
+
+				{% set ap = total_columns - ns.pd %}
+				<td>{{ ap }}</td>
+
+				{% set tp = (ns.pd / total_columns * 100) if total_columns > 0 else 0 %}
+				<td>{{ "%.2f"|format(tp) }}</td>  <!-- Format to two decimal places -->
+			</tr>
+			{% endfor %}
+		</tbody>
+
+
+    </table>
+    <br>
+    <center><a href="{{ url_for('attendance_page') }}"><button><b>Go Back</b></button></a></center>
+</body>
+</html>

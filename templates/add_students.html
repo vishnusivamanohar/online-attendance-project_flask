@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Online Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://img.freepik.com/premium-vector/serene-nighttime-landscape-with-mountains-lake-sunset_1203312-3291.jpg') no-repeat center center/cover;
+            color: #333;
+            min-height: 100vh;
+        }
+
+         .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .navbar a {
+            text-decoration: none;
+            margin: 0 15px;
+            color: black;
+        }
+        .navbar .about {
+            background: orange;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+        }
+		.logo{
+			color:black;
+		}
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px;
+            flex-wrap: wrap;
+        }
+
+        .form-box, .form-box2 {
+			margin-top:30px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            min-width: 400px;
+            box-sizing: border-box;
+            transition: transform 0.3s;
+        }
+
+        .form-box:hover, .form-box2:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-box h2, .form-box2 h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-box select,
+        .form-box input,
+        .form-box button,
+        .form-box2 select,
+        .form-box2 input,
+        .form-box2 button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+
+        .form-box select:focus,
+        .form-box input:focus,
+        .form-box2 select:focus,
+        .form-box2 input:focus {
+            border-color: orange;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2);
+        }
+
+        .form-box button,
+        .form-box2 button {
+            background: linear-gradient(to right, #ff8c00, #ff6b00);
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .form-box button:hover,
+        .form-box2 button:hover {
+            background: linear-gradient(to right, #ff6b00, #ff5500);
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 0;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            overflow-x: auto;
+            border-left: 4px solid orange;
+        }
+
+        .about-btn {
+            background: linear-gradient(to right, #ff8c00, #ff6b00);
+            padding: 10px 20px;
+            color: white;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .about-btn:hover {
+            background: linear-gradient(to right, #ff6b00, #ff5500);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 107, 0, 0.3);
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .form-box, .form-box2 {
+                width: 90%;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body onload="updateDate()">
+    <div class="navbar">
+        <div class="logo"><strong>Online Attendance</strong></div>
+        <div>
+            <a href="{{ url_for('home_page') }}">Home</a>
+            <a href="{{ url_for('students_page') }}"><u>Students</u></a>
+            <a href="{{ url_for('attendance_page') }}">Attendance</a>
+            <a href="{{ url_for('mail_page') }}">Mail</a>
+            <a href="{{ url_for('sem_year_options') }}">S/Y Options</a>
+        </div>
+        <div>
+            <a href="{{ url_for('about_page') }}" style="background: orange; padding: 10px 15px; color: white; border-radius: 5px;">About</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Excel Upload Form -->
+        <div class="form-box2">
+            <h2>Import Students from Excel</h2>
+            <form >
+                <pre>
+Make sure your Excel file (1st_AIMLB_Students.xlsx) has a structure like:
+
+Name        Roll Number    Phone Number    Email
+--------    -----------    ------------    -----
+Vishnu      AIML001        9876543210      vishnu@email.com
+...         ...            ...             ...
+                </pre>
+                <input type="text" name="file_name" placeholder="Enter file name (e.g., 1st_AIMLB_Students.xlsx)" required>
+                <button type="submit" class="mxlp">Upload</button>
+            </form>
+        </div>
+
+        <!-- Manual Data Form -->
+        <div class="form-box">
+            <h2>Add Students Manually</h2>
+            <form action="{{ url_for('add') }}" method="POST">
+                <select name="branch" id="branch" required onchange="updateSections()">
+                    <option value="" disabled selected>Select Branch</option>
+                    <option value="AIML">AIML</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="CSE">CSE</option>
+                    <option value="AIDS">AIDS</option>
+                    <option value="C&MEC">C&MEC</option>
+                </select>
+
+                <select name="section" id="section" required>
+                    <option value="" disabled selected>Select Section</option>
+                </select>
+
+                <select name="year" required>
+                    <option value="" disabled selected>Select Year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+
+                <input type="number" name="no_of_students" placeholder="Number of students" required>
+                <button type="submit">Proced</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function updateSections() {
+            const branch = document.getElementById("branch").value;
+            const sectionDropdown = document.getElementById("section");
+            sectionDropdown.innerHTML = '<option value="" disabled selected>Select Section</option>';
+
+            let sections = [];
+            if (branch === "AIML") {
+                sections = ["A", "B"];
+            } else if (branch === "ECE" || branch === "EEE") {
+                sections = ["A", "B", "C"];
+            } else if (branch === "CSE") {
+                sections = ["A", "B", "C", "D", "E", "F", "G"];
+            } else if (branch === "AIDS") {
+                sections = ["A", "B"];
+            } else if (branch === "C&MEC") {
+                sections = ["A"];
+            }
+
+            sections.forEach(section => {
+                const option = document.createElement("option");
+                option.value = section;
+                option.textContent =section;
+                sectionDropdown.appendChild(option);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Attendance - Online Attendance</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://img.freepik.com/premium-vector/serene-nighttime-landscape-with-mountains-lake-sunset_1203312-3291.jpg') no-repeat center center/cover;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      color: black;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      margin: 0 15px;
+      color: black;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      height: auto;
+      min-height: 80vh;
+      padding: 40px 30px;
+      gap: 40px;
+    }
+
+    .welcome-text {
+      max-width: 600px;
+      flex: 1;
+      text-align: left;
+    }
+
+    .welcome-text h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .welcome-text p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .learn-more-btn {
+      padding: 10px 20px;
+      background: orange;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .form-box {
+      width: 100%;
+      max-width: 450px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      margin: 0 auto;
+      flex: 1;
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: black;
+    }
+
+    .form-box button {
+      width: 100%;
+      padding: 12px;
+      background: orange;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .form-box button:hover {
+      background: darkorange;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .welcome-text, .form-box {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .welcome-text h1 {
+        font-size: 2rem;
+        color: black;
+      }
+
+      .welcome-text p {
+        font-size: 1rem;
+      }
+
+      .form-box {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo"><strong>Online Attendance</strong></div>
+    <div>
+      <a href="{{ url_for('home_page') }}">Home</a>
+      <a href="{{ url_for('students_page') }}">Students</a>
+      <a href="{{ url_for('attendance_page') }}"><u>Attendance</u></a>
+      <a href="{{ url_for('mail_page') }}">Mail</a>
+      <a href="{{ url_for('sem_year_options') }}">S/Y options</a>
+    </div>
+    <div>
+      <a href="{{ url_for('about_page') }}" class="about" style="background: orange; padding: 10px 15px; color: white; border-radius: 5px;">About</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="welcome-text">
+      <h1 style="color: black;">Main Attendance page</h1>
+      <h2>Attendance page allows you to perform attendance related activities.</h2>
+      <p>By using the adjacent buttons you are able to mark and view attendance for a selected class. You can also see attendance percentage of the class. For more info click below.</p>
+      <a href="{{ url_for('about_page') }}" class="learn-more-btn">Learn More</a>
+    </div>
+
+    <div class="form-box">
+      <h2>Attendance Options</h2>
+      <a href="{{ url_for('student_attendance') }}"><button type="submit">Student Attendance</button></a>
+      <a href="{{ url_for('display_attendance') }}"><button type="submit">Display Attendance</button></a>
+      <a href="{{ url_for('attendance_persentage') }}"><button type="submit">Attendance Persentage</button></a>
+    </div>
+  </div>
+
+  <script>
+    var action = "{{ action }}";
+    console.log("Action:", action);
+    if (action === "yes") {
+      alert("Attendance is saccesfully Made");
+    }
+    if (action === "no") {
+      alert("Your time is out! or holiday");
+    }
+    if (action === "del") {
+      alert("Data is successfully deleted");
+    }
+    if (action === "nodel") {
+      alert("Error! Data is not deleted");
+    }
+  </script>
+</body>
+</html>
