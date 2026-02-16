@@ -6,8 +6,7 @@ This project implements a web-based attendance management system — enabling te
 The system supports: adding/removing students, marking attendance per period, viewing attendance records, calculating attendance percentage, and sending email notifications to all or selected students. It’s designed to make attendance processes easier, faster, and more organized.  
 
 ## Demo / Live Site  
-*(If you have deployed the project — add the live URL here)*  
-[Online Attendance Live Demo](https://vishnusivamanohar.github.io/about-page/online%20attendance.html)  
+[more about Online Attendance website](https://vishnusivamanohar.github.io/about-page/online%20attendance.html)  
 
 ## Table of Contents  
 - [Features](#features)  
