@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Attendance Table</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://plus.unsplash.com/premium_photo-1676068244719-765a1964d25e?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #fff;
+      margin-top: 40px;
+      font-size: 2em;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    }
+
+    form {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 60px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      margin-top: 30px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #444;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    th {
+      background-color: #fdd835;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .rn {
+      background-color: #ff9800;
+      color: #fff;
+    }
+
+    .date-header {
+      background-color: #fdd835;
+    }
+
+    .sub-header {
+      background-color: #e0e0e0;
+      font-weight: normal;
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.4);
+      cursor: pointer;
+    }
+
+    button {
+      display: block;
+      width: 220px;
+      margin: 30px auto 0;
+      padding: 14px 0;
+      font-size: 16px;
+      background: linear-gradient(to right, #ffa726, #fb8c00);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #fb8c00, #ef6c00);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      table {
+        font-size: 14px;
+      }
+
+      th, td {
+        padding: 10px;
+      }
+
+      button {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Attendance For {{ table_name }} - {{ column_name }}</h1>
+  <form action="{{ url_for('save_attendance') }}" method="POST">
+    <input type="hidden" name="branch" value="{{ table_name.split('_')[1] }}">
+    <input type="hidden" name="section" value="{{ table_name.split('_')[2] }}">
+    <input type="hidden" name="year" value="{{ table_name.split('_')[0] }}">
+    <input type="hidden" name="column_name" value="{{ column_name }}">
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2" class="sn">S.N</th>
+          <th rowspan="2" class="rn">Roll Number</th>
+		  <th rowspan="2" class="stn">Student Name</th>
+          <th colspan="1" class="date-header">{{ today_date }}</th>
+        </tr>
+        <tr>
+          <th>{{ period }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ row.roll_number }}</td>
+		  <td>{{ row.full_name }}</td>
+          <td>
+            <input type="checkbox" name="attendance_{{ row.roll_number }}" {% if row[column_name] == 'P' %}checked{% endif %}>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit">Apply Attendance</button>
+  </form>
+</body>
+</html>
